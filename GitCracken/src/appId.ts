@@ -33,7 +33,7 @@ export class AppId {
     let mac: string;
     try {
       mac = await util.promisify(getMac)();
-    } catch {
+    } catch (e) {
       mac = uuid.v4();
     }
     return AppId.generate(mac);
