@@ -5,6 +5,8 @@ GitKraken utils for non-commercial use
 Working on `GNU/Linux`, `Windows` and `macOS`!
 
 > WARNING! On `macOS` you should patch `GitKraken` only after first launch and full program closing!
+>
+> WARNING! Do not install `GitKraken` from `snap` on `Ubuntu`, patcher wont be able to work. Use common installation.
 
 ## Requirements
 
@@ -16,6 +18,10 @@ Working on `GNU/Linux`, `Windows` and `macOS`!
 - `yarn install`
 - `yarn build`
 - `node dist/bin/gitcracken.js --help` for more usage information
+
+if yarn does not work (can't download sevmer package), use npm:
+- `npm install`
+- `npm run build`
 
 ### Patcher
 
