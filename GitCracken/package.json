@@ -32,7 +32,7 @@
     "babel-preset-env": "^1.6.1",
     "chalk": "^2.3.0",
     "commander": "^2.12.2",
-    "diff": "^3.4.0",
+    "diff": "^3.5.0",
     "figlet": "^1.2.0",
     "fs-extra": "^5.0.0",
     "getmac": "^1.2.1",
