@@ -11,6 +11,7 @@ Author: KillWolfVlad at [GitKraken-AUR](https://github.com/KillWolfVlad/GitKrake
 
 - `Node.js` v12 LTS or later
 - `yarn`
+- `GitKraken v6.5.2 to v7.0.1`
 
 ## Quick start
 
