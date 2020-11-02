@@ -1,8 +1,8 @@
---- static/index.js
-+++ static/index.js
-@@ -1,7 +1,27 @@
- // Warning: You almost certainly do *not* want to edit this code -
+--- src/render/static/entryPoints/main/index.js
++++ src/render/static/entryPoints/main/index.js
+@@ -2,7 +2,27 @@
  // instead, you want to edit src/js/main.jsx instead
+ /* eslint-disable no-console */
 
 +function PatchSnapshot() {
 +  const edmLiteD = snapshotResult.customRequire('@axosoft/edm-lite-d/src/d.js');
