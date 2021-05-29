@@ -1,0 +1,24 @@
+--- src/render/static/entryPoints/main/index.js
++++ src/render/static/entryPoints/main/index.js
+@@ -2,7 +2,21 @@
+ // instead, you want to edit src/js/main.jsx instead
+ /* eslint-disable no-console */
+ 
++function applyPatch() {
++  document.addEventListener("keydown", function (e) {
++    if (e.which === 123) {
++      require('electron').remote.BrowserWindow.getFocusedWindow().openDevTools();
++    }
++  })
++
++  snapshotResult.customRequire("./src/sharedModules/remotePrivacy/shared/RemotePrivacySelectors.js").getArePrivateReposForbidden = function (state) {
++    return false
++  }
++}
++
+ (function() {
++  applyPatch();
++
+   const Perf = snapshotResult.customRequire('./src/js/utils/Performance.js');
+   Perf.timeEnd('loading monaco scripts');
+   Perf.time('index.js pre-bootstrap');
