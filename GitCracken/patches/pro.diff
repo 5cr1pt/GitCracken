@@ -1,30 +1,30 @@
---- src/render/static/entryPoints/main/index.js
-+++ src/render/static/entryPoints/main/index.js
-@@ -2,7 +2,27 @@
- // instead, you want to edit src/js/main.jsx instead
+--- src/main/static/startMainProcess.js
++++ src/main/static/startMainProcess.js
+@@ -1,4 +1,19 @@
  /* eslint-disable no-console */
-
-+function PatchSnapshot() {
-+  const edmLiteD = snapshotResult.customRequire('@axosoft/edm-lite-d/src/d.js');
-+  snapshotResult.customRequire.cache['@axosoft/edm-lite-d/src/d.js'] = {
-+    exports: function() {
-+      let response = JSON.parse(edmLiteD(...arguments).toString('utf8'));
-+      if ('licenseExpiresAt' in response || 'licensedFeatures' in response) {
-+        response = {
-+          ...response,
-+          availableTrialDays: null,
-+          licenseExpiresAt: 8640000000000000,
-+          licensedFeatures: ['pro']
-+        };
-+      }
-+      return Buffer.from(JSON.stringify(response), 'utf8');
++
++function patchSnapshot() {
++  var RegistrationHelpers = snapshotResult.customRequire('./src/sharedModules/registration/shared/RegistrationHelpers.js');
++  var { decodeBody } = RegistrationHelpers;
++  RegistrationHelpers.decodeBody = function() {
++    var body = decodeBody(...arguments);
++    body = {
++      ...body,
++      licensedFeatures: ['pro'],
++      proAccessState: {}
 +    }
-+  };
++    return body;
++  }
 +}
 +
  (function() {
-+  PatchSnapshot();
-+
-   const Perf = snapshotResult.customRequire('./src/js/utils/Performance.js');
-   Perf.timeEnd('loading monaco scripts');
-   Perf.time('index.js pre-bootstrap');
+   if (process.env.GITKRAKEN_OPEN_MAIN_DEV_TOOLS) {
+     require('./startDevTools');
+@@ -32,6 +47,7 @@
+   global.mode = buildMode;
+ 
+   if (typeof snapshotResult !== 'undefined') {
++    patchSnapshot();
+     const path = require('path');
+     snapshotResult.setGlobals(global, process, global, {}, console, require, path.resolve());
+     snapshotResult.customRequire('./src/main/main.js');
